@@ -1,0 +1,193 @@
+/* print.css — governs ONLY the printable receipt on print-bill.html */
+
+.receipt-page {
+  background: #fff;
+  max-width: 800px;
+  margin: 24px auto;
+  padding: 36px 40px;
+  border: 1px solid #dce3ea;
+  border-radius: 10px;
+  font-family: var(--font-doc, "Poppins", sans-serif);
+  color: #1a1a1a;
+}
+
+.receipt-letterhead {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  border-bottom: 3px solid #0f3d5c;
+  padding-bottom: 14px;
+  margin-bottom: 16px;
+}
+.receipt-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.receipt-logo {
+  width: 58px;
+  height: 58px;
+  object-fit: contain;
+}
+.receipt-hospital-name {
+  font-size: 22px;
+  font-weight: 700;
+  color: #0f3d5c;
+  margin: 0;
+}
+.receipt-hospital-meta {
+  font-size: 11.5px;
+  color: #444;
+  margin-top: 4px;
+  line-height: 1.6;
+}
+
+.receipt-qr-block {
+  text-align: center;
+  font-size: 10px;
+  color: #666;
+  flex-shrink: 0;
+}
+.receipt-qr-block .bill-tag {
+  font-size: 12px;
+  font-weight: 700;
+  color: #0f3d5c;
+  margin-top: 6px;
+}
+
+.receipt-billmeta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  margin-bottom: 18px;
+}
+.receipt-billmeta .billno {
+  font-weight: 700;
+  color: #0f3d5c;
+  font-size: 15px;
+}
+
+.receipt-patient {
+  font-size: 13px;
+  border: 1px solid #e2e2e2;
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-bottom: 18px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 20px;
+}
+
+.receipt-items {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+  margin-bottom: 14px;
+}
+.receipt-items th,
+.receipt-items td {
+  border: 1px solid #d8d8d8;
+  padding: 7px 9px;
+}
+.receipt-items th {
+  background: #f4f7fa;
+  text-align: left;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+.receipt-items td.num,
+.receipt-items th.num {
+  text-align: right;
+}
+
+.receipt-totals {
+  width: 300px;
+  margin-left: auto;
+  font-size: 13px;
+}
+.receipt-totals div {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+}
+.receipt-totals .grand {
+  font-weight: 700;
+  font-size: 16px;
+  border-top: 2px solid #0f3d5c;
+  margin-top: 6px;
+  padding-top: 8px;
+  color: #0f3d5c;
+}
+
+.receipt-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 46px;
+}
+.receipt-signature {
+  text-align: center;
+  font-size: 12.5px;
+}
+.receipt-signature .line {
+  border-top: 1px solid #333;
+  width: 180px;
+  margin-bottom: 6px;
+}
+.receipt-note {
+  font-size: 10.5px;
+  color: #777;
+  text-align: center;
+  margin-top: 24px;
+}
+
+.receipt-actions {
+  max-width: 800px;
+  margin: 16px auto 10px;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  padding: 0 4px;
+  flex-wrap: wrap;
+}
+
+.receipt-page-landscape {
+  max-width: 1100px;
+}
+
+/* Named page rules for print — the `page` property tells the browser which
+   @page ruleset to use per element, which is far more reliable for switching
+   orientation than dynamically injecting a plain @page rule right before print(). */
+@page single-copy {
+  size: A4 portrait;
+  margin: 14mm 16mm;
+}
+@page two-copy {
+  size: A4 landscape;
+  margin: 12mm 14mm;
+}
+.receipt-single {
+  page: single-copy;
+}
+.receipt-double {
+  page: single-copy;
+}
+
+@media print {
+  #nav,
+  .receipt-actions,
+  #toast-box {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+  }
+  .receipt-page {
+    border: none;
+    box-shadow: none;
+    margin: 0;
+    max-width: 100%;
+    padding: 0;
+  }
+}
