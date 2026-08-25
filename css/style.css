@@ -1,0 +1,18 @@
+/* style.css — small residual styles Tailwind utilities don't cover directly. */
+
+:root {
+  --font-ui: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  --font-doc: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+body { font-family: var(--font-ui); }
+
+/* Tabs underline (settings page) */
+.tab-btn.active { color: #0B7285; border-color: #0B7285; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* Custom scrollbar for horizontally-scrolling tables on small screens */
+.table-wrap { overflow-x: auto; }
+.table-wrap::-webkit-scrollbar { height: 6px; }
+.table-wrap::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 3px; }
