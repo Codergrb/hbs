@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bill Receipt — Hospital Billing System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = { theme: { extend: {
+    colors: { navy: { DEFAULT: '#0F3D5C', dark: '#0A2C42' }, teal: { DEFAULT: '#0B7285', dark: '#086070' } },
+    fontFamily: { sans: ['Poppins','system-ui','sans-serif'] },
+  } } }
+</script>
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/print2bill.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans">
+<div id="nav"></div>
+
+<div class="receipt-actions">
+  <a href="bill-history.html" class="px-4 py-2.5 rounded-lg border border-slate-300 text-slate-700 text-sm font-semibold hover:border-teal hover:text-teal transition bg-white">← Back to History</a>
+  <button class="px-4 py-2.5 rounded-lg bg-teal text-white text-sm font-semibold hover:bg-teal-dark transition shadow-sm" id="print-btn">🖨 Print</button>
+  <button class="px-4 py-2.5 rounded-lg bg-navy text-white text-sm font-semibold hover:bg-navy-dark transition shadow-sm" id="print-2up-btn">🖨 2-Copy</button>
+</div>
+
+<div class="receipt-page receipt-single" id="receipt-root">
+  <div class="text-center text-slate-400 py-10">Loading bill…</div>
+</div>
+
+<script src="js/db.js"></script>
+<script src="js/common.js"></script>
+<script src="js/print-bill.js"></script>
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Settings — Hospital Billing System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = { theme: { extend: {
+    colors: { navy: { DEFAULT: '#0F3D5C', dark: '#0A2C42' }, teal: { DEFAULT: '#0B7285', dark: '#086070' } },
+    fontFamily: { sans: ['Poppins','system-ui','sans-serif'] },
+  } } }
+</script>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans">
+<div id="nav"></div>
+
+<div class="max-w-6xl mx-auto px-4 sm:px-6 py-8">
+  <div class="mb-6">
+    <h1 class="text-2xl sm:text-3xl font-bold text-navy-dark">Settings</h1>
+    <p class="text-slate-500 text-sm mt-1">Hospital details, categories, price list, doctors and data management</p>
+  </div>
+
+  <div class="flex gap-1 border-b border-slate-200 mb-6 flex-wrap">
+    <button class="tab-btn active px-4 py-2.5 text-sm font-semibold text-slate-500 border-b-2 border-transparent" data-tab="info">Hospital Info</button>
+    <button class="tab-btn px-4 py-2.5 text-sm font-semibold text-slate-500 border-b-2 border-transparent" data-tab="categories">Categories</button>
+    <button class="tab-btn px-4 py-2.5 text-sm font-semibold text-slate-500 border-b-2 border-transparent" data-tab="prices">Price List</button>
+    <button class="tab-btn px-4 py-2.5 text-sm font-semibold text-slate-500 border-b-2 border-transparent" data-tab="packages">Packages</button>
+    <button class="tab-btn px-4 py-2.5 text-sm font-semibold text-slate-500 border-b-2 border-transparent" data-tab="doctors">Doctors</button>
+    <button class="tab-btn px-4 py-2.5 text-sm font-semibold text-slate-500 border-b-2 border-transparent" data-tab="data">Data Management</button>
+  </div>
+
+  <!-- Hospital Info -->
+  <div class="tab-panel active" id="tab-info">
+    <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
+      <h2 class="font-semibold text-lg text-navy-dark border-b border-slate-200 pb-3 mb-4">Letterhead &amp; Receipt Details</h2>
+      <form id="info-form" class="space-y-4">
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div><label class="block text-xs font-semibold text-slate-500 mb-1.5" for="i-name">Hospital Name *</label><input id="i-name" required maxlength="120" class="w-full px-3 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal focus:border-teal" /></div>
+          <div><label class="block text-xs font-semibold text-slate-500 mb-1.5" for="i-pan">PAN No.</label><input id="i-pan" maxlength="30" class="w-full px-3 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal focus:border-teal" /></div>
+        </div>
+        <div><label class="block text-xs font-semibold text-slate-500 mb-1.5" for="i-address">Address</label><input id="i-address" maxlength="200" class="w-full px-3 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal focus:border-teal" /></div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div><label class="block text-xs font-semibold text-slate-500 mb-1.5" for="i-phone">Phone</label><input id="i-phone" maxlength="30" class="w-full px-3 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal focus:border-teal" /></div>
+          <div><label class="block text-xs font-semibold text-slate-500 mb-1.5" for="i-email">Email</label><input id="i-email" type="email" maxlength="120" class="w-full px-3 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal focus:border-teal" /></div>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div><label class="block text-xs font-semibold text-slate-500 mb-1.5" for="i-signatory">Authorised Signatory Title</label><input id="i-signatory" maxlength="60" class="w-full px-3 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal focus:border-teal" /></div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-500 mb-1.5" for="i-bsyear">Bill Numbering — BS Year</label>
+            <div class="flex gap-2">
+              <input id="i-bsyear" type="number" min="2000" max="2200" class="w-32 px-3 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal focus:border-teal" />
+              <button type="button" class="px-3 py-1.5 rounded-lg border border-slate-300 text-xs font-semibold hover:border-teal hover:text-teal transition" id="suggest-bsyear">Suggest</button>
+            </div>
+            <p class="text-xs text-slate-400 mt-1">Bill numbers use the pattern {BSYear}HMS{counter}, e.g. 2083HMS001. Counter resets to 001 whenever this year value changes. Suggestion is approximate — verify against the actual Nepali calendar.</p>
+          </div>
+        </div>
+        <div><label class="block text-xs font-semibold text-slate-500 mb-1.5" for="i-footer">Receipt Footer Note</label><input id="i-footer" maxlength="160" class="w-full px-3 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal focus:border-teal" /></div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-500 mb-1.5" for="i-logo">Hospital Logo (PNG/JPG, max 500KB)</label>
+          <input id="i-logo" type="file" accept="image/png,image/jpeg" class="text-sm" />
+          <img id="logo-preview" class="h-12 mt-2 hidden" />
+        </div>
+        <button type="submit" class="px-5 py-2.5 rounded-lg bg-teal text-white text-sm font-semibold hover:bg-teal-dark transition shadow-sm">Save Hospital Info</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Categories -->
+  <div class="tab-panel" id="tab-categories">
+    <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm mb-5">
+      <h2 class="font-semibold text-lg text-navy-dark border-b border-slate-200 pb-3 mb-4">Add Category</h2>
+      <form id="category-form" class="flex flex-wrap items-end gap-3">
+        <div class="flex-1 min-w-[200px]">
+          <label class="block text-xs font-semibold text-slate-500 mb-1.5" for="cat-name">Category Name *</label>
+          <input id="cat-name" required maxlength="40" placeholder="e.g. Dental, Radiology" class="w-full px-3 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal focus:border-teal" />
+        </div>
+        <button class="px-5 py-2.5 rounded-lg bg-teal text-white text-sm font-semibold hover:bg-teal-dark transition shadow-sm" type="submit">Add Category</button>
+      </form>
+    </div>
+    <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
+      <h2 class="font-semibold text-lg text-navy-dark border-b border-slate-200 pb-3 mb-4">Current Categories</h2>
+      <div id="category-list" class="flex flex-wrap gap-2"></div>
+      <p class="text-xs text-slate-400 mt-3">Categories used by doctors, the price list, or existing bills are kept on those records even if deleted here — deleting only removes it from future dropdowns.</p>
+    </div>
+  </div>
+
+  <!-- Price List -->
+  <div class="tab-panel" id="tab-prices">
+    <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm mb-5">
+      <h2 class="font-semibold text-lg text-navy-dark border-b border-slate-200 pb-3 mb-4">Add Price List Item</h2>
+      <form id="price-form" class="grid sm:grid-cols-5 gap-3 items-end">
+        <div class="sm:col-span-2"><label class="block text-xs font-semibold text-slate-500 mb-1.5" for="pr-name">Item Name *</label><input id="pr-name" required maxlength="100" class="w-full px-3 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal focus:border-teal" /></div>
+        <div><label class="block text-xs font-semibold text-slate-500 mb-1.5" for="pr-category">Category *</label><select id="pr-category" required class="w-full px-3 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal focus:border-teal"></select></div>
+        <div><label class="block text-xs font-semibold text-slate-500 mb-1.5" for="pr-rate">Rate (Rs) *</label><input id="pr-rate" type="number" min="0" step="0.01" required class="w-full px-3 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal focus:border-teal" /></div>
+        <div><label class="block text-xs font-semibold text-slate-500 mb-1.5" for="pr-unit">Unit</label><input id="pr-unit" placeholder="e.g. visit, test" maxlength="30" class="w-full px-3 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal focus:border-teal" /></div>
+        <div class="sm:col-span-5"><button class="px-5 py-2.5 rounded-lg bg-teal text-white text-sm font-semibold hover:bg-teal-dark transition shadow-sm" type="submit">Add Item</button></div>
+      </form>
+    </div>
+    <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
+      <h2 class="font-semibold text-lg text-navy-dark border-b border-slate-200 pb-3 mb-4">Current Price List</h2>
+      <div class="table-wrap">
+        <table class="w-full text-sm">
+          <thead><tr class="text-left text-xs uppercase text-slate-500"><th class="pb-2">Item</th><th class="pb-2">Category</th><th class="pb-2 text-right">Rate</th><th class="pb-2">Unit</th><th class="pb-2">Status</th><th class="pb-2"></th></tr></thead>
+          <tbody id="price-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Packages -->
+  <div class="tab-panel" id="tab-packages">
+    <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm mb-5">
+      <h2 class="font-semibold text-lg text-navy-dark border-b border-slate-200 pb-3 mb-4">Create Package</h2>
+      <form id="package-form">
+        <div class="grid sm:grid-cols-2 gap-4 mb-3">
+          <div><label class="block text-xs font-semibold text-slate-500 mb-1.5" for="pkg-name">Package Name *</label><input id="pkg-name" required maxlength="100" placeholder="e.g. Normal Delivery Package" class="w-full px-3 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal focus:border-teal" /></div>
+          <div><label class="block text-xs font-semibold text-slate-500 mb-1.5" for="pkg-category">Category *</label><select id="pkg-category" required class="w-full px-3 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal focus:border-teal"></select></div>
+        </div>
+        <label class="block text-xs font-semibold text-slate-500 mb-1.5">Included Items</label>
+        <div id="pkg-items" class="space-y-2 mb-2"></div>
+        <button type="button" class="px-3 py-1.5 rounded-lg border border-slate-300 text-xs font-semibold hover:border-teal hover:text-teal transition" id="pkg-add-row">+ Add Item Row</button>
+        <div class="mt-4"><button class="px-5 py-2.5 rounded-lg bg-teal text-white text-sm font-semibold hover:bg-teal-dark transition shadow-sm" type="submit">Save Package</button></div>
+      </form>
+    </div>
+    <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
+      <h2 class="font-semibold text-lg text-navy-dark border-b border-slate-200 pb-3 mb-4">Current Packages</h2>
+      <div id="package-list" class="space-y-3"></div>
+    </div>
+  </div>
+
+  <!-- Doctors -->
+  <div class="tab-panel" id="tab-doctors">
+    <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm mb-5">
+      <h2 class="font-semibold text-lg text-navy-dark border-b border-slate-200 pb-3 mb-4">Add Doctor</h2>
+      <form id="doctor-form" class="grid sm:grid-cols-6 gap-3 items-end">
+        <div class="sm:col-span-2"><label class="block text-xs font-semibold text-slate-500 mb-1.5" for="dr-name">Doctor Name *</label><input id="dr-name" required maxlength="100" class="w-full px-3 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal focus:border-teal" /></div>
+        <div><label class="block text-xs font-semibold text-slate-500 mb-1.5" for="dr-category">Category *</label><select id="dr-category" required class="w-full px-3 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal focus:border-teal"></select></div>
+        <div><label class="block text-xs font-semibold text-slate-500 mb-1.5" for="dr-dept">Department</label><input id="dr-dept" maxlength="60" class="w-full px-3 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal focus:border-teal" /></div>
+        <div><label class="block text-xs font-semibold text-slate-500 mb-1.5" for="dr-contact">Contact</label><input id="dr-contact" maxlength="30" class="w-full px-3 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal focus:border-teal" /></div>
+        <div><label class="block text-xs font-semibold text-slate-500 mb-1.5" for="dr-commission">Commission %</label><input id="dr-commission" type="number" min="0" max="100" step="0.1" value="0" class="w-full px-3 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal focus:border-teal" /></div>
+        <div class="sm:col-span-6"><button class="px-5 py-2.5 rounded-lg bg-teal text-white text-sm font-semibold hover:bg-teal-dark transition shadow-sm" type="submit">Add Doctor</button></div>
+      </form>
+    </div>
+    <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
+      <h2 class="font-semibold text-lg text-navy-dark border-b border-slate-200 pb-3 mb-4">Current Doctors</h2>
+      <div class="table-wrap">
+        <table class="w-full text-sm">
+          <thead><tr class="text-left text-xs uppercase text-slate-500"><th class="pb-2">Name</th><th class="pb-2">Category</th><th class="pb-2">Department</th><th class="pb-2">Contact</th><th class="pb-2 text-right">Commission</th><th class="pb-2">Status</th><th class="pb-2"></th></tr></thead>
+          <tbody id="doctor-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Data Management -->
+  <div class="tab-panel" id="tab-data">
+    <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm mb-5">
+      <h2 class="font-semibold text-lg text-navy-dark border-b border-slate-200 pb-3 mb-4">Backup</h2>
+      <p class="text-sm text-slate-500 mb-3">Export everything (settings, categories, price list, doctors, bills) as a JSON file, or restore from a previous export.</p>
+      <div class="flex flex-wrap gap-3">
+        <button class="px-4 py-2.5 rounded-lg border border-slate-300 text-slate-700 text-sm font-semibold hover:border-teal hover:text-teal transition bg-white" id="export-btn">Export All Data (.json)</button>
+        <label class="px-4 py-2.5 rounded-lg border border-slate-300 text-slate-700 text-sm font-semibold hover:border-teal hover:text-teal transition bg-white cursor-pointer">Import Data (.json)<input id="import-file" type="file" accept="application/json" class="hidden" /></label>
+      </div>
+    </div>
+    <div class="bg-white border border-rose-300 rounded-xl p-5 shadow-sm">
+      <h2 class="font-semibold text-lg text-rose-600 border-b border-slate-200 pb-3 mb-4">Danger Zone</h2>
+      <p class="text-sm text-slate-500 mb-3">This permanently deletes the entire local database — settings, categories, price list, doctors and every bill. This cannot be undone.</p>
+      <div class="max-w-xs mb-3">
+        <label class="block text-xs font-semibold text-slate-500 mb-1.5" for="confirm-text">Type DELETE to confirm</label>
+        <input id="confirm-text" placeholder="DELETE" class="w-full px-3 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-rose-500" />
+      </div>
+      <button class="px-4 py-2.5 rounded-lg border border-rose-500 text-rose-600 text-sm font-semibold hover:bg-rose-600 hover:text-white transition bg-white" id="clear-db-btn">Clear Entire Database</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/db.js"></script>
+<script src="js/common.js"></script>
+<script src="js/settings.js"></script>
+</body>
+</html>

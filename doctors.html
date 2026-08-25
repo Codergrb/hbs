@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Doctor Performance — Hospital Billing System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = { theme: { extend: {
+    colors: { navy: { DEFAULT: '#0F3D5C', dark: '#0A2C42' }, teal: { DEFAULT: '#0B7285', dark: '#086070' } },
+    fontFamily: { sans: ['Poppins','system-ui','sans-serif'] },
+  } } }
+</script>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans">
+<div id="nav"></div>
+
+<div class="max-w-6xl mx-auto px-4 sm:px-6 py-8">
+  <div class="flex items-end justify-between flex-wrap gap-3 mb-6">
+    <div>
+      <h1 class="text-2xl sm:text-3xl font-bold text-navy-dark">Doctor Performance</h1>
+      <p class="text-slate-500 text-sm mt-1">Ranked by patients seen (bills where they were the prescribing/attending doctor)</p>
+    </div>
+    <div class="flex items-center gap-2">
+      <label class="text-sm text-slate-500" for="sort-mode">Sort by</label>
+      <select id="sort-mode" class="px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal focus:border-teal">
+        <option value="count">Patient Count</option>
+        <option value="revenue">Revenue Generated</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm mb-5">
+    <h2 class="font-semibold text-lg text-navy-dark border-b border-slate-200 pb-3 mb-4">Ranking</h2>
+    <div id="bars-wrap"></div>
+  </div>
+
+  <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
+    <h2 class="font-semibold text-lg text-navy-dark border-b border-slate-200 pb-3 mb-4">Detail</h2>
+    <div class="table-wrap">
+      <table class="w-full text-sm">
+        <thead><tr class="text-left text-xs uppercase text-slate-500">
+          <th class="pb-2">Doctor</th><th class="pb-2">Department</th><th class="pb-2">Category</th><th class="pb-2 text-right">Patients</th><th class="pb-2 text-right">Revenue</th><th class="pb-2 text-right">Commission %</th><th class="pb-2 text-right">Commission Earned</th>
+        </tr></thead>
+        <tbody id="detail-body"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script src="js/db.js"></script>
+<script src="js/common.js"></script>
+<script src="js/doctors.js"></script>
+</body>
+</html>
